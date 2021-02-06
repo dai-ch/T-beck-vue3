@@ -3,7 +3,6 @@ export default {
   data() {
     return {
       todos: [],
-      showData:[],
     };
   },
   methods: {
@@ -14,24 +13,13 @@ export default {
       if (!comment.value) {
         return;
       }
-      const todo = [
-        {
-          id: this.todos.length,
-          comment: comment.value,
-          status: '作業中',
-        },
-      ];
-      this.showTodo(todo);
+      // this.showTodo(todo);
+      this.$store.commit('addTodo', { comment: comment });
       comment.value = '';
     },
     //タスクを削除するメソッド
-    deleteTodo(todo) {
-      //spliceメソッドでtodo.idをキーにして配列を削除
-      this.todos.splice(todo.id, 1);
-      //todoの配列の長さを再計算し、各要素番号をidへ代入する
-      for (let i = 0; i < this.todos.length; i++) {
-        this.todos[i].id = i;
-      }
+    deleteTodo(todoId) {
+      this.$store.commit('deleteTodo', {deleteId: todoId });
     },
     //タスクの状態を変更するメソッド
     changeStatus(todo) {
@@ -79,6 +67,22 @@ export default {
         return this.showTodo(todoStatus);
       }
     },
+    todoListBtn() {
+      console.log('dddd');
+      this.$router.push('/');
+    },
+    workingBtn() {
+      console.log('gggg');
+      this.$router.push('/work');
+    },
+    finishBtn() {
+      console.log('hhhh');
+      this.$router.push('/finish');
+    },
   },
-  computed: {},
+  computed: {
+    getTodos() {
+      return this.$store.getters.getTodos;
+    },
+  },
 };

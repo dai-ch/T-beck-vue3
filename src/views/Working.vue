@@ -9,26 +9,21 @@
               checked="checked"
               name="workingStatus"
               v-on:click="todoListPageBtn"
-              v-model="jobStatus"
-              value="全て"
             />全て
           </td>
           <td>
             <input
               type="radio"
               name="workingStatus"
-              v-on:click="workingPageBtn"
-              v-model="jobStatus"
-              value="作業中"
-            />作業中
+              v-on:click="workingPageBtn
+              "
+            />作業中!!!!!!
           </td>
           <td>
             <input
               name="workingStatus"
               type="radio"
               v-on:click="finishPageBtn"
-              v-model="jobStatus"
-              value="完了"
             />完了
           </td>
         </tr>
@@ -38,42 +33,12 @@
           <th>状態</th>
         </tr>
       </thead>
-      <tbody v-if="jobStatus == '全て'">
+      <tbody>
         <tr v-for="todo in getTodos" v-bind:key="todo.id">
           <td>{{ todo.id }}</td>
           <td>{{ todo.comment }}</td>
           <td>
-            <button class="btn" v-on:click="changeStatus(todo.status, todo.id)">
-              {{ todo.status }}
-            </button>
-            <button class="btn" v-on:click="deleteTodo(todo.id)">
-              削除
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      <tbody v-if="jobStatus == '作業中'">
-        ssssss
-        <tr v-for="todo in getTodos" v-bind:key="todo.id">
-          <td>{{ todo.id }}</td>
-          <td>{{ todo.comment }}</td>
-          <td>
-            <button class="btn" v-on:click="changeStatus(todo.status, todo.id)">
-              {{ todo.status }}
-            </button>
-            <button class="btn" v-on:click="deleteTodo(todo.id)">
-              削除
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      <tbody v-if="jobStatus == '完了'">
-        oookokoko
-        <tr v-for="todo in getTodos" v-bind:key="todo.id">
-          <td>{{ todo.id }}</td>
-          <td>{{ todo.comment }}</td>
-          <td>
-            <button class="btn" v-on:click="changeStatus(todo.status, todo.id)">
+            <button class="btn" v-on:click="changeStatus(todo.status,todo.id)">
               {{ todo.status }}
             </button>
             <button class="btn" v-on:click="deleteTodo(todo.id)">
@@ -91,13 +56,13 @@
   </div>
 </template>
 
+
 <script>
 export default {
   el: '#todo',
   data() {
     return {
       todos: [],
-      jobStatus: '全て',
     };
   },
   methods: {
@@ -113,11 +78,11 @@ export default {
     },
     //タスクを削除するメソッド
     deleteTodo(todoId) {
-      this.$store.commit('deleteTodo', { id: todoId });
+      this.$store.commit('deleteTodo', {id: todoId });
     },
     //タスクの状態を変更するメソッド
-    changeStatus(todoStatus, todoId) {
-      this.$store.commit('changeStatus', { status: todoStatus, id: todoId });
+    changeStatus(todoStatus,todoId) {
+      this.$store.commit('changeStatus', {status: todoStatus,id: todoId });
     },
     //プロパティを表示するメソッド
     showTodo(addTodos) {
@@ -155,15 +120,16 @@ export default {
       }
     },
     todoListPageBtn() {
-      //  this.$store.commit('todoListPageBtn');
+      console.log('dddd');
+      this.$router.push('/');
     },
     workingPageBtn() {
-      console.log();
-      this.jobStatus;
-      // this.$store.commit('workingPageBtn');
+      this.$store.commit('workingPageBtn');
+
     },
     finishPageBtn() {
-      //  this.$store.commit('finishPageBtn');
+      console.log('hhhh');
+      this.$router.push('/finish');
     },
   },
   computed: {
@@ -172,6 +138,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style scoped>
