@@ -8,7 +8,6 @@
               type="radio"
               checked="checked"
               name="workingStatus"
-              v-on:click="changePageBtn((value = '全て'))"
               v-model="jobStatus"
               value="全て"
             />全て
@@ -17,7 +16,6 @@
             <input
               type="radio"
               name="workingStatus"
-              v-on:click="changePageBtn((value = '作業中'))"
               v-model="jobStatus"
               value="作業中"
             />作業中
@@ -26,7 +24,6 @@
             <input
               name="workingStatus"
               type="radio"
-              v-on:click="changePageBtn((value = '完了'))"
               v-model="jobStatus"
               value="完了"
             />完了
@@ -52,24 +49,8 @@
           </td>
         </tr>
       </tbody>
-      <tbody v-if="jobStatus == '作業中'">
-        hoge
-        <tr v-for="todo in getTodos" v-bind:key="todo.id">
-          <td>{{ todo.id }}</td>
-          <td>{{ todo.comment }}</td>
-          <td>
-            <button class="btn" v-on:click="changeStatus(todo.status, todo.id)">
-              {{ todo.status }}
-            </button>
-            <button class="btn" v-on:click="deleteTodo(todo.id)">
-              削除
-            </button>
-          </td>
-        </tr>
-      </tbody>
-      <tbody v-if="jobStatus == '完了'">
-        hoge2
-        <tr v-for="todo in getFinishTodos" v-bind:key="todo.id">
+      <tbody v-for="todo in getTodos" v-bind:key="todo.id">
+        <tr v-if="jobStatus == todo.status">
           <td>{{ todo.id }}</td>
           <td>{{ todo.comment }}</td>
           <td>
