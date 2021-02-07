@@ -4,6 +4,7 @@ export default createStore({
   strict: true,
   state: {
     todos: [],
+
   },
   mutations: {
     addTodo(state, newComment) {
@@ -33,23 +34,55 @@ export default createStore({
       if (changeStatus.status === '完了') {
         state.todos[changeStatus.id].status = '作業中';
       }
+    }, //プロパティを表示するメソッド
+    showTodo(state,newTodos) {
+      console.log(newTodos);
+      //現在保存されている配列情報を複製
+      // const editTodos = state.todos.slice();
+      // console.log(editTodos);
+
+      //todosに保存されている要素を削除
+      // state.todos.splice(0, state.todos.length);
+      // console.log(state.todos);
+
+      // for (let i = 0; i < addTodos.length; i++) {
+      //   this.todos.push(addTodos[i]);
+      //   this.showData.push(addTodos[i]);
+      //   //テストコード
+      //   if (addTodos.length > 30) {
+      //     return;
+      //   }
+      // }
     },
-    // todoListPageBtn() {
-    //   console.log('kiteruyo');
-    //   this.$router.push('/');
-    // },
-    // workingPageBtn() {
-    //   this.$router.push('/work');
-    // },
-    // finishPageBtn() {
-    //   this.$router.push('/finish');
-    // },
   },
+  computed: {},
   getters: {
     getTodos(state) {
       return state.todos;
     },
   },
-  actions: {},
+  actions: {
+    //ラジオボタンをクリックした時の処理
+    changePageBtn(context, btnValue) {
+      const BtnValue = btnValue.btnValue;
+
+      //各ボタンに応じて画面出力するデータを抽出
+      if (BtnValue === '全て') {
+        context.commit('showTodo', this.state.todos);
+      } else if (BtnValue === '作業中') {
+        //statusが作業中に該当するクエリを抽出する
+        let todoStatus = this.state.todos.filter((todo) => {
+          return todo.status === '作業中';
+        });
+        context.commit('showTodo', todoStatus);
+      } else if (BtnValue === '完了') {
+        //statusが作業中に該当するクエリを抽出する
+        let todoStatus = this.state.todos.filter((todo) => {
+          return todo.status === '完了';
+        });
+        context.commit('showTodo', todoStatus);
+      }
+    },
+  },
   modules: {},
 });

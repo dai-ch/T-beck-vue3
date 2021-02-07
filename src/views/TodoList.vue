@@ -8,7 +8,7 @@
               type="radio"
               checked="checked"
               name="workingStatus"
-              v-on:click="todoListPageBtn"
+              v-on:click="changePageBtn((value = '全て'))"
               v-model="jobStatus"
               value="全て"
             />全て
@@ -17,7 +17,7 @@
             <input
               type="radio"
               name="workingStatus"
-              v-on:click="workingPageBtn"
+              v-on:click="changePageBtn((value = '作業中'))"
               v-model="jobStatus"
               value="作業中"
             />作業中
@@ -26,7 +26,7 @@
             <input
               name="workingStatus"
               type="radio"
-              v-on:click="finishPageBtn"
+              v-on:click="changePageBtn((value = '完了'))"
               v-model="jobStatus"
               value="完了"
             />完了
@@ -96,7 +96,6 @@ export default {
   el: '#todo',
   data() {
     return {
-      todos: [],
       jobStatus: '全て',
     };
   },
@@ -119,51 +118,9 @@ export default {
     changeStatus(todoStatus, todoId) {
       this.$store.commit('changeStatus', { status: todoStatus, id: todoId });
     },
-    //プロパティを表示するメソッド
-    showTodo(addTodos) {
-      //現在保存されている配列情報を複製
-      //const editTodos = addTodos.slice();
-
-      //todosに保存されている要素を削除
-      //this.todos.splice(0, this.todos.length);
-
-      for (let i = 0; i < addTodos.length; i++) {
-        this.todos.push(addTodos[i]);
-        this.showData.push(addTodos[i]);
-        //テストコード
-        if (addTodos.length > 30) {
-          return;
-        }
-      }
-    },
-    //ボタンをクリックした時の処理
-    StateBtn(todos, value) {
-      if (value === '全て') {
-        this.showTodo(todos);
-      } else if (value === '作業中') {
-        //statusが作業中に該当するクエリを抽出する
-        let todoStatus = todos.filter((todo) => {
-          return todo.status === '作業中';
-        });
-        return this.showTodo(todoStatus);
-      } else if (value === '完了') {
-        //statusが作業中に該当するクエリを抽出する
-        let todoStatus = todos.filter((todo) => {
-          return todo.status === '完了';
-        });
-        return this.showTodo(todoStatus);
-      }
-    },
-    todoListPageBtn() {
-      //  this.$store.commit('todoListPageBtn');
-    },
-    workingPageBtn() {
-      console.log();
-      this.jobStatus;
-      // this.$store.commit('workingPageBtn');
-    },
-    finishPageBtn() {
-      //  this.$store.commit('finishPageBtn');
+    //ラジオボタンを押して表示を切り替えるメソッド
+    changePageBtn(changeBtnValue) {
+      this.$store.dispatch('changePageBtn', { btnValue: changeBtnValue });
     },
   },
   computed: {
