@@ -67,26 +67,8 @@ export default createStore({
   actions: {
     //ラジオボタンをクリックした時の処理
     changePageBtn(context, btnValue) {
-      const BtnValue = btnValue.btnValue;
-      //各ボタンに応じて画面出力するデータを抽出
-      if (BtnValue === '全て') {
-        let todoStatus = this.state.todos.filter((todo) => {
-          return todo.status;
-        });
-        context.commit('showTodo', todoStatus);
-      } else if (BtnValue === '作業中') {
-        //statusが作業中に該当するクエリを抽出する
-        let todoStatus = this.state.todos.filter((todo) => {
-          return todo.status === '作業中';
-        });
-        context.commit('showTodo', todoStatus);
-      } else if (BtnValue === '完了') {
-        //statusが作業中に該当するクエリを抽出する
-        let todoStatus = this.state.todos.filter((todo) => {
-          return todo.status === '完了';
-        });
-        context.commit('showTodo', { todoStatus:todoStatus,BtnValue:BtnValue });
-      }
+      console.log(context)
+      console.log(btnValue)
     },
   },
   modules: {},
