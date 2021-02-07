@@ -69,7 +69,7 @@
       </tbody>
       <tbody v-if="jobStatus == '完了'">
         hoge2
-        <tr v-for="todo in getTodos" v-bind:key="todo.id">
+        <tr v-for="todo in getFinishTodos" v-bind:key="todo.id">
           <td>{{ todo.id }}</td>
           <td>{{ todo.comment }}</td>
           <td>
@@ -126,6 +126,9 @@ export default {
   computed: {
     getTodos() {
       return this.$store.getters.getTodos;
+    },
+    getFinishTodos() {
+      return this.$store.getters.getFinishTodos;
     },
   },
 };

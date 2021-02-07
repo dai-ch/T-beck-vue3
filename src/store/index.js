@@ -4,7 +4,7 @@ export default createStore({
   strict: true,
   state: {
     todos: [],
-    todosFinisied: [],
+    todosManaged: [],
   },
   mutations: {
     addTodo(state, newComment) {
@@ -40,12 +40,14 @@ export default createStore({
       const editTodos = state.todos.slice();
       console.log(editTodos);
 
+      console.log(newTodos);
       //更新予定の値をaddNumに格納
       const addNum = newTodos;
       //console.log(addNum);
       //todosに保存されている要素を削除
       state.todos.splice(0, state.todos.length);
       //console.log('test');
+
       //addNumのプロパティをtodosにプッシュ
       for (let i = 0; i < addNum.length; i++) {
         this.state.todos.push(addNum[i]);
@@ -57,6 +59,9 @@ export default createStore({
   getters: {
     getTodos(state) {
       return state.todos;
+    },
+    getFinishTodos(state) {
+      return state.todosManaged;
     },
   },
   actions: {
@@ -80,7 +85,7 @@ export default createStore({
         let todoStatus = this.state.todos.filter((todo) => {
           return todo.status === '完了';
         });
-        context.commit('showTodo', todoStatus);
+        context.commit('showTodo', { todoStatus:todoStatus,BtnValue:BtnValue });
       }
     },
   },
