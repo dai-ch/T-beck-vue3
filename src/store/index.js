@@ -4,7 +4,7 @@ export default createStore({
   strict: true,
   state: {
     todos: [],
-
+    todosFinisied: [],
   },
   mutations: {
     addTodo(state, newComment) {
@@ -35,24 +35,22 @@ export default createStore({
         state.todos[changeStatus.id].status = '作業中';
       }
     }, //プロパティを表示するメソッド
-    showTodo(state,newTodos) {
-      console.log(newTodos);
+    showTodo(state, newTodos) {
       //現在保存されている配列情報を複製
-      // const editTodos = state.todos.slice();
-      // console.log(editTodos);
+      const editTodos = state.todos.slice();
+      console.log(editTodos);
 
+      //更新予定の値をaddNumに格納
+      const addNum = newTodos;
+      //console.log(addNum);
       //todosに保存されている要素を削除
-      // state.todos.splice(0, state.todos.length);
-      // console.log(state.todos);
-
-      // for (let i = 0; i < addTodos.length; i++) {
-      //   this.todos.push(addTodos[i]);
-      //   this.showData.push(addTodos[i]);
-      //   //テストコード
-      //   if (addTodos.length > 30) {
-      //     return;
-      //   }
-      // }
+      state.todos.splice(0, state.todos.length);
+      //console.log('test');
+      //addNumのプロパティをtodosにプッシュ
+      for (let i = 0; i < addNum.length; i++) {
+        this.state.todos.push(addNum[i]);
+      }
+      console.log(addNum);
     },
   },
   computed: {},
@@ -65,10 +63,12 @@ export default createStore({
     //ラジオボタンをクリックした時の処理
     changePageBtn(context, btnValue) {
       const BtnValue = btnValue.btnValue;
-
       //各ボタンに応じて画面出力するデータを抽出
       if (BtnValue === '全て') {
-        context.commit('showTodo', this.state.todos);
+        let todoStatus = this.state.todos.filter((todo) => {
+          return todo.status;
+        });
+        context.commit('showTodo', todoStatus);
       } else if (BtnValue === '作業中') {
         //statusが作業中に該当するクエリを抽出する
         let todoStatus = this.state.todos.filter((todo) => {

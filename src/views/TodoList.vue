@@ -53,7 +53,7 @@
         </tr>
       </tbody>
       <tbody v-if="jobStatus == '作業中'">
-        ssssss
+        hoge
         <tr v-for="todo in getTodos" v-bind:key="todo.id">
           <td>{{ todo.id }}</td>
           <td>{{ todo.comment }}</td>
@@ -68,7 +68,7 @@
         </tr>
       </tbody>
       <tbody v-if="jobStatus == '完了'">
-        oookokoko
+        hoge2
         <tr v-for="todo in getTodos" v-bind:key="todo.id">
           <td>{{ todo.id }}</td>
           <td>{{ todo.comment }}</td>
