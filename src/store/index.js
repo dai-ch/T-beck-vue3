@@ -41,7 +41,6 @@ export default createStore({
       return state.todos;
     },
   },
-  actions: {
-  },
+  actions: {},
   modules: {},
 });

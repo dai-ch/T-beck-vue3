@@ -58,7 +58,6 @@
     </form>
   </div>
 </template>
-
 <script>
 export default {
   el: '#todo',
