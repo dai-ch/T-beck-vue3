@@ -4,7 +4,6 @@ export default createStore({
   strict: true,
   state: {
     todos: [],
-    todosManaged: [],
   },
   mutations: {
     addTodo(state, newComment) {
@@ -34,25 +33,6 @@ export default createStore({
       if (changeStatus.status === '完了') {
         state.todos[changeStatus.id].status = '作業中';
       }
-    }, //プロパティを表示するメソッド
-    showTodo(state, newTodos) {
-      //現在保存されている配列情報を複製
-      const editTodos = state.todos.slice();
-      console.log(editTodos);
-
-      console.log(newTodos);
-      //更新予定の値をaddNumに格納
-      const addNum = newTodos;
-      //console.log(addNum);
-      //todosに保存されている要素を削除
-      state.todos.splice(0, state.todos.length);
-      //console.log('test');
-
-      //addNumのプロパティをtodosにプッシュ
-      for (let i = 0; i < addNum.length; i++) {
-        this.state.todos.push(addNum[i]);
-      }
-      console.log(addNum);
     },
   },
   computed: {},
@@ -60,16 +40,8 @@ export default createStore({
     getTodos(state) {
       return state.todos;
     },
-    getFinishTodos(state) {
-      return state.todosManaged;
-    },
   },
   actions: {
-    //ラジオボタンをクリックした時の処理
-    changePageBtn(context, btnValue) {
-      console.log(context);
-      console.log(btnValue);
-    },
   },
   modules: {},
 });
