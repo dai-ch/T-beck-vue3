@@ -4,28 +4,15 @@
       <thead>
         <tr>
           <td>
-            <input
-              type="radio"
-              checked="checked"
-              name="workingStatus"
-              v-model="jobStatus"
-              value="全て"
+            <input type="radio" checked="checked" name="workingStatus" v-model="jobStatus" value="全て"
             />全て
           </td>
           <td>
-            <input
-              type="radio"
-              name="workingStatus"
-              v-model="jobStatus"
-              value="作業中"
+            <input type="radio" name="workingStatus" v-model="jobStatus" value="作業中"
             />作業中
           </td>
           <td>
-            <input
-              name="workingStatus"
-              type="radio"
-              v-model="jobStatus"
-              value="完了"
+            <input name="workingStatus" type="radio" v-model="jobStatus" value="完了"
             />完了
           </td>
         </tr>
@@ -71,7 +58,6 @@
     </form>
   </div>
 </template>
-
 <script>
 export default {
   el: '#todo',
@@ -99,17 +85,10 @@ export default {
     changeStatus(todoStatus, todoId) {
       this.$store.commit('changeStatus', { status: todoStatus, id: todoId });
     },
-    //ラジオボタンを押して表示を切り替えるメソッド
-    changePageBtn(changeBtnValue) {
-      this.$store.dispatch('changePageBtn', { btnValue: changeBtnValue });
-    },
   },
   computed: {
     getTodos() {
       return this.$store.getters.getTodos;
-    },
-    getFinishTodos() {
-      return this.$store.getters.getFinishTodos;
     },
   },
 };
