@@ -35,7 +35,6 @@ export default createStore({
       }
     },
   },
-  computed: {},
   getters: {
     getTodos(state) {
       return state.todos;

@@ -4,7 +4,7 @@
       <thead>
         <tr>
           <td>
-            <input type="radio" checked="checked" name="workingStatus" v-model="jobStatus" value="全て"
+            <input type="radio" name="workingStatus" v-model="jobStatus" value="全て" checked
             />全て
           </td>
           <td>
